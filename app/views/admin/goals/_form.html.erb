@@ -1,0 +1,37 @@
+<%= simple_form_for([:admin, :store, @goal]) do |form| %>
+  <% if @goal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@goal.errors.count, "error") %> prohibited this admin_goal from being saved:</h2>
+
+      <ul>
+      <% @goal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :start_date %>
+    <%= form.text_field :start_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_date %>
+    <%= form.text_field :end_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ref_month %>
+    <%= form.text_field :ref_month %>
+  </div>
+
+  <div class="field">
+    <%= form.label :store_id %>
+    <%= form.text_field :store_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
