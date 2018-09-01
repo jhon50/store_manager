@@ -12,7 +12,7 @@
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
   <meta name="viewport" content="width=device-width"/>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
 
@@ -40,7 +40,12 @@
             <p>Dashboard</p>
           </a>
         </li>
-
+        <li class="active">
+          <%= link_to admin_stores_path do %>
+            <i class="pe-7s-graph"></i>
+            <p>Lojas</p>
+          <% end %>
+        </li>
       </ul>
     </div>
   </div>
@@ -104,6 +109,6 @@
 
   </div>
 </div>
-<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
 </body>
 </html>
