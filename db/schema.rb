@@ -10,7 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_30_182403) do
+ActiveRecord::Schema.define(version: 2018_09_01_024328) do
+
+  create_table "goal_day_vendors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.bigint "goal_day_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["goal_day_id"], name: "index_goal_day_vendors_on_goal_day_id"
+  end
+
+  create_table "goal_days", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.decimal "amount", precision: 16, scale: 2
+    t.bigint "goal_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["goal_id"], name: "index_goal_days_on_goal_id"
+  end
+
+  create_table "goals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "ref_month"
+    t.decimal "amount", precision: 16, scale: 2
+    t.bigint "store_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_goals_on_store_id"
+  end
 
   create_table "stores", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -33,5 +60,17 @@ ActiveRecord::Schema.define(version: 2018_08_30_182403) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "vendors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.bigint "store_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_vendors_on_store_id"
+  end
+
+  add_foreign_key "goal_day_vendors", "goal_days"
+  add_foreign_key "goal_days", "goals"
+  add_foreign_key "goals", "stores"
   add_foreign_key "stores", "users"
+  add_foreign_key "vendors", "stores"
 end
