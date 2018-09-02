@@ -12,20 +12,22 @@
 
 ActiveRecord::Schema.define(version: 2018_09_01_024328) do
 
-  create_table "goal_day_vendors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.bigint "goal_day_id"
+  create_table "day_vendors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "vendor_id"
+    t.bigint "day_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["goal_day_id"], name: "index_goal_day_vendors_on_goal_day_id"
+    t.index ["day_id"], name: "index_day_vendors_on_day_id"
+    t.index ["vendor_id"], name: "index_day_vendors_on_vendor_id"
   end
 
-  create_table "goal_days", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "days", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.date "date"
     t.decimal "amount", precision: 16, scale: 2
     t.bigint "goal_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["goal_id"], name: "index_goal_days_on_goal_id"
+    t.index ["goal_id"], name: "index_days_on_goal_id"
   end
 
   create_table "goals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -68,8 +70,9 @@ ActiveRecord::Schema.define(version: 2018_09_01_024328) do
     t.index ["store_id"], name: "index_vendors_on_store_id"
   end
 
-  add_foreign_key "goal_day_vendors", "goal_days"
-  add_foreign_key "goal_days", "goals"
+  add_foreign_key "day_vendors", "days"
+  add_foreign_key "day_vendors", "vendors"
+  add_foreign_key "days", "goals"
   add_foreign_key "goals", "stores"
   add_foreign_key "stores", "users"
   add_foreign_key "vendors", "stores"
