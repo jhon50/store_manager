@@ -1,6 +1,8 @@
 class Admin::GoalsController < Admin::ApplicationController
   before_action :set_admin_goal, only: [:show, :edit, :update, :destroy]
   before_action :set_store
+  around_action :handle_exceptions
+
   # GET /admin/goals
   def index
     @goals = Goal.where(store: @store)
@@ -23,8 +25,7 @@ class Admin::GoalsController < Admin::ApplicationController
   def create
     @goal = Goal.new(admin_goal_params)
     if @goal.save
-      # redirect to
-      redirect_to admin_store_goals_path
+      redirect_to new_admin_store_goal_day_path(goal_id: @goal)
     else
       render 'new'
     end
@@ -46,15 +47,25 @@ class Admin::GoalsController < Admin::ApplicationController
   end
 
   private
-    def set_admin_goal
-      @goal = Goal.find(params[:id])
-    end
 
-    def set_store
-      @store = params[:store_id]
-    end
+  def set_admin_goal
+    @goal = Goal.find(params[:id])
+  end
 
-    def admin_goal_params
-      params.require(:goal).permit(:start_date, :end_date, :ref_month, :amount, :store_id)
-    end
+  def set_store
+    @store = params[:store_id]
+  end
+
+  def admin_goal_params
+    params.require(:goal).permit(:start_date, :end_date, :ref_month, :amount, :store_id)
+  end
+
+  def handle_exceptions
+    yield
+  rescue Goal::DayAlreadyExistError => e
+    @goal.errors.add(:start_date, e)
+    render 'new'
+  rescue StandardError => e
+    render 'new'
+  end
 end

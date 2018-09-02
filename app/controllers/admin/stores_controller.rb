@@ -4,7 +4,7 @@ class Admin::StoresController < Admin::ApplicationController
   # GET /admin/stores
   # GET /admin/stores.json
   def index
-    @stores = Store.all
+    @stores = Store.where(user: current_user)
   end
 
   # GET /admin/stores/1
@@ -24,7 +24,7 @@ class Admin::StoresController < Admin::ApplicationController
   # POST /admin/stores
   # POST /admin/stores.json
   def create
-    @store = Store.new(admin_store_params)
+    @store = Store.new(admin_store_params.merge(user: current_user))
     if @store.save
       redirect_to admin_stores_path
     else
@@ -57,6 +57,6 @@ class Admin::StoresController < Admin::ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_store_params
-      params.require(:store).permit(:name, :address, :user_id)
+      params.require(:store).permit(:name, :address)
     end
 end

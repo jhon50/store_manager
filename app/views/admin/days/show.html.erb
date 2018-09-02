@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Inicio:</strong>
+  <%= @day.start_date %>
+</p>
+<p>
+  <strong>Fim:</strong>
+  <%= @day.end_date %>
+</p>
+<p>
+  <strong>Mês de referência:</strong>
+  <%= @day.ref_month %>
+</p>
+
+<%= link_to 'Edit', edit_admin_store_goal_day_path(@day) %> |
+<%= link_to 'Back', admin_store_goal_days_path %>

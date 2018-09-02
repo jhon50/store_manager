@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Admin goals</h1>
+<h1>Metas</h1>
+
+<h4>Loja: <%= @goals.first.store.name %></h4>
 
 <table>
   <thead>
@@ -26,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Admin goal', new_admin_store_goal_path(store_id: @store) %>
+<%= link_to 'Nova Meta', new_admin_store_goal_path(store_id: @store) %>
