@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/' => 'home#index'
     resources :stores do
-      resources :goals
+      resources :goals do
+        resources :days
+      end
     end
     resources :vendors
   end
