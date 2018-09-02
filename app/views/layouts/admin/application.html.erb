@@ -5,7 +5,7 @@
   <link rel="icon" type="image/png" href="assets/img/favicon.ico">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
-  <title>Light Bootstrap Dashboard by Creative Tim</title>
+  <title>Store Manager</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
@@ -18,27 +18,17 @@
 
 <div class="wrapper">
   <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
-
-    <!--
-
-        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
-        Tip 2: you can also add an image using data-image tag
-
-    -->
-
     <div class="sidebar-wrapper">
       <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text">
-          Creative Tim
-        </a>
+        <%= link_to 'Store Manager', root_path, class: 'simple-text' %>
       </div>
 
       <ul class="nav">
         <li class="active">
-          <a href="dashboard.html">
+          <%= link_to admin_path do %>
             <i class="pe-7s-graph"></i>
             <p>Dashboard</p>
-          </a>
+          <% end %>
         </li>
         <li>
           <%= link_to admin_stores_path do %>
@@ -86,7 +76,6 @@
       </div>
     </nav>
 
-
     <div class="content">
       <div class="container-fluid">
         <div class="row">
@@ -94,7 +83,6 @@
         </div>
       </div>
     </div>
-
 
     <footer class="footer">
       <div class="container-fluid">
@@ -112,7 +100,6 @@
         </p>
       </div>
     </footer>
-
   </div>
 </div>
 
