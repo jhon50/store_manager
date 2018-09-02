@@ -1,0 +1,38 @@
+.col-md-6
+  .panel.panel-primary
+    .panel-heading
+      h1 = store.name
+    .panel-body
+      - store.goals.each do |goal|
+        .row
+          .col-md-5
+            span Mês de referência:
+          .col-md-7
+            span = goal.ref_month
+        .row
+          .col-md-5
+            span Data de início:
+          .col-md-7
+            span = goal.start_date
+        .row
+          .col-md-5
+            span Data de fim:
+          .col-md-7
+            span = goal.end_date
+        .row
+          .col-md-12
+            h4 Detalhamento dos dias
+          - goal.days.each do |day|
+            - next if day.amount.blank?
+            .col-md-12
+              span = "Dia #{day.date}"
+            .col-md-5
+              span Valor:
+            .col-md-7
+              span = number_to_currency(day.amount)
+            .col-md-5
+              span Vendedores:
+            - amount_per_vendor = day.amount &./ day.day_vendors.count
+            - day.day_vendors.each do |day_vendor|
+              .col-md-12
+                span = "#{day_vendor.vendor.name} (#{number_to_currency(amount_per_vendor)})"
