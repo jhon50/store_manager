@@ -1,11 +1,12 @@
 class Admin::GoalsController < Admin::ApplicationController
   before_action :set_admin_goal, only: [:show, :edit, :update, :destroy]
   before_action :set_store
-  around_action :handle_exceptions
+  before_action :any_vendors?, only: :new
+  around_action :rescue_exceptions, only: :create
 
   # GET /admin/goals
   def index
-    @goals = Goal.where(store: @store)
+    @goals = Goal.where(store_id: @store)
   end
 
   # GET /admin/goals/1
@@ -34,7 +35,7 @@ class Admin::GoalsController < Admin::ApplicationController
   # PATCH/PUT /admin/goals/1
   def update
     if @goal.update(admin_goal_params)
-      redirect_to admin_goals_path, notice: 'goal was successfully updated.'
+      redirect_to admin_store_goals_path(store_id: admin_goal_params[:store_id]), notice: 'goal was successfully updated.'
     else
       render 'edit'
     end
@@ -43,7 +44,7 @@ class Admin::GoalsController < Admin::ApplicationController
   # DELETE /admin/goals/1
   def destroy
     @goal.destroy
-    redirect_to admin_goals_path, notice: 'goal was successfully destroyed.'
+    redirect_to admin_store_goals_path, notice: 'goal was successfully destroyed.'
   end
 
   private
@@ -60,7 +61,12 @@ class Admin::GoalsController < Admin::ApplicationController
     params.require(:goal).permit(:start_date, :end_date, :ref_month, :amount, :store_id)
   end
 
-  def handle_exceptions
+  def any_vendors?
+    flash[:notice] = 'Você precisa ter vendedores cadastrados antes de adicionar uma meta.'
+    redirect_to new_admin_vendor_path(store_id: @store) unless Store.find(@store).vendors.any?
+  end
+
+  def rescue_exceptions
     yield
   rescue Goal::DayAlreadyExistError => e
     @goal.errors.add(:start_date, e)
