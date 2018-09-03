@@ -1,7 +1,7 @@
 class Goal < ApplicationRecord
   class DayAlreadyExistError < StandardError; end
   belongs_to :store
-  has_many :days
+  has_many :days, dependent: :destroy
 
   before_save :unique_days?
   validates :amount, :start_date, :end_date, :ref_month, presence: true
