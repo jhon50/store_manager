@@ -5,26 +5,29 @@
     .panel-body
       - store.goals.each do |goal|
         .row
-          .col-md-5
-            span Mês de referência:
           .col-md-7
-            span = goal.ref_month
+            h2 = "#{goal.ref_month}/#{goal.start_date.year%100}"
         .row
           .col-md-5
             span Data de início:
           .col-md-7
-            span = goal.start_date
+            span = l(goal.start_date.to_date)
         .row
           .col-md-5
             span Data de fim:
           .col-md-7
-            span = goal.end_date
+            span = l(goal.end_date.to_date)
+        .row
+          .col-md-5
+            span Valor Total:
+          .col-md-7
+            span = number_to_currency(goal.amount)
         .row
           .col-md-12
             h4 Detalhamento dos dias
           - goal.days.each do |day|
             - next if day.amount.blank?
-            .col-md-12
+            .col-md-12.goal-day
               span = "Dia #{day.date}"
             .col-md-5
               span Valor:

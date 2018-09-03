@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Admin Stores</h1>
+<h1>Lojas</h1>
 
 <table>
   <thead>
@@ -18,10 +18,10 @@
         <td><%= store.name %></td>
         <td><%= store.address %></td>
         <td><%= store.user.email %></td>
-        <td><%= link_to 'Metas', admin_store_goals_path(store_id: store) %></td>
-        <td><%= link_to 'Show', admin_store_path(store) %></td>
-        <td><%= link_to 'Edit', edit_admin_store_path(store) %></td>
-        <td><%= link_to 'Destroy', admin_store_path(store), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Metas', admin_store_goals_path(store_id: store), class: 'btn btn-default' %></td>
+        <td><%= link_to 'Visualizar', admin_store_path(store), class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Editar', edit_admin_store_path(store), class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Remover', admin_store_path(store), class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -29,4 +29,4 @@
 
 <br>
 
-<%= link_to 'New Admin Store', new_admin_store_path %>
+<%= link_to 'Nova Loja', new_admin_store_path, class: 'btn btn-primary' %>

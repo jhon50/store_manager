@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= form.label :ref_month %>
-    <%= form.text_field :ref_month %>
+    <%= form.input_field :ref_month, collection: I18n. t("date.month_names"), include_blank: 'Selecione um mês' %>
   </div>
 
   <div class="field">

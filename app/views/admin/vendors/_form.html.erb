@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :store_id %>
-    <%= form.text_field :store_id %>
+    <%= form.input_field :store_id, collection: Store.all.collect {|a| [a.name, a.id]}, include_blank: 'Selecione uma loja' %>
   </div>
 
   <div class="actions">

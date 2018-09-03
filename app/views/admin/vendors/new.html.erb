@@ -1,5 +1,7 @@
-<h1>New Admin vendor</h1>
-
+<h1>Adicionar Vendedor</h1>
+<% flash.each do |key, value| %>
+  <%= content_tag :div, value, class: "alert alert-danger" %>
+<% end %>
 <%= render 'form' %>
 
 <%= link_to 'Back', admin_vendors_path %>
