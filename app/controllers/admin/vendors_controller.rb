@@ -14,7 +14,7 @@ class Admin::VendorsController < Admin::ApplicationController
 
   # GET /admin/vendors/new
   def new
-    @vendor = Vendor.new
+    @vendor = Vendor.new(store_id: params[:store_id])
   end
 
   # GET /admin/vendors/1/edit
