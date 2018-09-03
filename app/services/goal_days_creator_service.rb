@@ -1,4 +1,5 @@
 class GoalDaysCreatorService
+  class GoalDaysCreationError < StandardError; end
   def initialize(days, goal)
     @days = days
     @goal = goal
