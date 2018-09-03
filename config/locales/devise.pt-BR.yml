@@ -41,6 +41,8 @@ pt-BR:
       send_paranoid_instructions: "Se seu endereço de email existir em nosso banco de dados, você receberá um link de redefinição de senha em alguns minutos."
       updated: "Sua senha foi atualizada com sucesso. Você agora está logado."
       updated_not_active: "Sua senha foi atualizada com sucesso."
+      new:
+        send_me_reset_password_instructions: 'Enviar instruções para resetar senha'
     registrations:
       destroyed: "Tchau! Sua conta foi cancelada com êxito. Esperamos ver você de novo em breve!"
       signed_up: "Bem-vindo! Você se registrou com êxito."
@@ -50,6 +52,8 @@ pt-BR:
       update_needs_confirmation: "Você atualizou sua conta com sucesso, mas nós precisamos verificar seu endereço de email. Por favor, cheque sua caixa de entrada e siga o link recebido."
       updated: "Sua conta foi atualizada com sucesso."
     sessions:
+      new:
+        sign_in: 'Logar'
       signed_in: "Logado com sucesso."
       signed_out: "Saiu com sucesso."
       already_signed_out: "Saiu com sucesso."
@@ -57,6 +61,11 @@ pt-BR:
       send_instructions: "Você receberá um email com instruções para desbloquear sua conta em alguns minutos."
       send_paranoid_instructions: "Se sua conta existir, você receberá um email com instruções para desbloqueá-la em alguns minutos."
       unlocked: "Sua conta foi desbloqueada com sucesso. Por favor, faça login para continuar."
+    shared:
+      links:
+        sign_up: 'Criar conta'
+        sign_in: 'Logar'
+        forgot_your_password: 'Esqueci minha senha'
   errors:
     messages:
       already_confirmed: "já foi confirmado, por favor faça login"

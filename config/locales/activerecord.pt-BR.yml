@@ -13,3 +13,5 @@ pt-BR:
       vendor:
         name: Nome
         store_id: Loja
+      user:
+        password: Senha
