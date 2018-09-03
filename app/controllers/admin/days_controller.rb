@@ -1,6 +1,7 @@
 class Admin::DaysController < Admin::ApplicationController
   before_action :set_admin_days, only: [:show, :edit, :update, :destroy]
   before_action :set_goal
+  around_action :rescue_exceptions, only: [:create]
 
   # GET /admin/days
   def index
@@ -28,6 +29,7 @@ class Admin::DaysController < Admin::ApplicationController
 
   # PATCH/PUT /admin/days/1
   def update
+    #TO-DO
     if @day.update(admin_day_params)
       redirect_to admin_days_path, notice: 'day was successfully updated.'
     else
@@ -42,15 +44,24 @@ class Admin::DaysController < Admin::ApplicationController
   end
 
   private
-    def set_admin_day
-      @day = Day.find(params[:id])
-    end
 
-    def set_goal
-      @goal = Goal.find(params[:goal_id])
-    end
+  def set_admin_day
+    @day = Day.find(params[:id])
+  end
+
+  def set_goal
+    @goal = Goal.find(params[:goal_id])
+  end
 
   def admin_days_params
-      params.require(:days).permit!
-    end
+    params.require(:days).permit!
+  end
+
+  def rescue_exceptions
+    yield
+  rescue GoalDaysCreatorService::GoalDaysCreationError => e
+    flash[:notice] = 'Erro ao criar os dias para a meta.'
+  rescue StandardError
+    render 'new'
+  end
 end
