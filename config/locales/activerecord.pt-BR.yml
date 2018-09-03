@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      mail_list:
+        one: Lista de Email
+        other: Listas de Emails
+    attributes:
+      goal:
+        start_date: Data de inínio
+        end_date: Date de fim
+        amount: Valor
+        ref_month: Mês de referência
+      vendor:
+        name: Nome
+        store_id: Loja
