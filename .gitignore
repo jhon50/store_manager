@@ -155,5 +155,3 @@ dump.rdb
 env.sh
 .history/
 .vscode/
-
-config/database.yml
