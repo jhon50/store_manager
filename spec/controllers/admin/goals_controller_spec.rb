@@ -34,9 +34,19 @@ RSpec.describe Admin::GoalsController, type: :controller do
   end
 
   describe "GET #new" do
-    it "returns a success response" do
-      get :new, params: {store_id: store}, session: valid_session
-      expect(response).to be_successful
+    context "without having vendors created" do
+      it "redirects to new vendor path" do
+        get :new, params: {store_id: store}, session: valid_session
+        expect(response).to redirect_to new_admin_vendor_path(store_id: 1)
+      end
+    end
+
+    context "having vendors created" do
+      let!(:vendor) {FactoryBot.create(:vendor)}
+      it "return success response" do
+        get :new, params: {store_id: store}, session: valid_session
+        expect(response).to be_successful
+      end
     end
   end
 
