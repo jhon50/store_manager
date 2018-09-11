@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple store manager using Ruby On Rails.
 
-Things you may want to cover:
+You can checkout demo at https://storemanager19.herokuapp.com/
 
-* Ruby version
+Ïnitial setup
+* rake db:setup rake db:migrate
 
-* System dependencies
+Run test suit
+* bundle exec rspec spec
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This project uses mysql(development) and postgres(production) database, you can change it by your own. This is only necessary for heroku deployment purposes, as it doesn't work well with mysql.
